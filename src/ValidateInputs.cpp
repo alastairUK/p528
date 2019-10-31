@@ -1,4 +1,4 @@
-#include "../include/p528.h"
+#include "../include/p528Impl.h"
 
 int ValidateInputs(double d__km, double h_1__meter, double h_2__meter, double f__mhz, double time_percentage)
 {

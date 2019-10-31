@@ -1,6 +1,6 @@
 #include "../include/LOSTable.h"
 
-#include "../include/p528.h"
+#include "../include/p528Impl.h"
 
 #include <math.h>
 

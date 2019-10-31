@@ -101,6 +101,38 @@ namespace
 
         ApprovalTests::Approvals::verify(os.str());
     }
+
+    void doCheckFullRes(int freqMHz, double Lb)
+    {
+        std::ostringstream os;
+        writeHeader(os, freqMHz, Lb);
+
+        auto numCols = std::max(h2__m.size(), h1__m.size());
+
+        for (const auto d : d__km)
+        {
+            fmt::fprintf(os, "\n%d", d);
+
+            for (decltype(numCols) i = 0; i < numCols; ++i)
+            {
+                Result res{};
+                auto ret = Main(d, h1__m[i], h2__m[i], freqMHz, Lb, &res);
+
+                os << ',';
+
+                if (i == 0)
+                {
+                    fmt::fprintf(os, "%f,%f", res.A_fs__db, res.A__db);
+                }
+                else
+                {
+                    fmt::fprintf(os, "%f", res.A__db);
+                }
+            }
+        }
+
+        ApprovalTests::Approvals::verify(os.str());
+    }
 }  // namespace
 
 TEST(ApprovalTests, Test125MHz_0_01)
@@ -301,4 +333,204 @@ TEST(ApprovalTests, Test15500MHz_0_50)
 TEST(ApprovalTests, Test15500MHz_0_95)
 {
     doCheck(15500, 0.95);
+}
+
+TEST(ApprovalTests, Test125MHz_0_01FullRes)
+{
+    doCheckFullRes(125, 0.01);
+}
+
+TEST(ApprovalTests, Test125MHz_0_05FullRes)
+{
+    doCheckFullRes(125, 0.05);
+}
+
+TEST(ApprovalTests, Test125MHz_0_10FullRes)
+{
+    doCheckFullRes(125, 0.10);
+}
+
+TEST(ApprovalTests, Test125MHz_0_50FullRes)
+{
+    doCheckFullRes(125, 0.50);
+}
+
+TEST(ApprovalTests, Test125MHz_0_95FullRes)
+{
+    doCheckFullRes(125, 0.95);
+}
+
+TEST(ApprovalTests, Test300MHz_0_01FullRes)
+{
+    doCheckFullRes(300, 0.01);
+}
+
+TEST(ApprovalTests, Test300MHz_0_05FullRes)
+{
+    doCheckFullRes(300, 0.05);
+}
+
+TEST(ApprovalTests, Test300MHz_0_10FullRes)
+{
+    doCheckFullRes(300, 0.10);
+}
+
+TEST(ApprovalTests, Test300MHz_0_50FullRes)
+{
+    doCheckFullRes(300, 0.50);
+}
+
+TEST(ApprovalTests, Test300MHz_0_95FullRes)
+{
+    doCheckFullRes(300, 0.95);
+}
+
+TEST(ApprovalTests, Test600MHz_0_01FullRes)
+{
+    doCheckFullRes(600, 0.01);
+}
+
+TEST(ApprovalTests, Test600MHz_0_05FullRes)
+{
+    doCheckFullRes(600, 0.05);
+}
+
+TEST(ApprovalTests, Test600MHz_0_10FullRes)
+{
+    doCheckFullRes(600, 0.10);
+}
+
+TEST(ApprovalTests, Test600MHz_0_50FullRes)
+{
+    doCheckFullRes(600, 0.50);
+}
+
+TEST(ApprovalTests, Test600MHz_0_95FullRes)
+{
+    doCheckFullRes(600, 0.95);
+}
+
+TEST(ApprovalTests, Test1200MHz_0_01FullRes)
+{
+    doCheckFullRes(1200, 0.01);
+}
+
+TEST(ApprovalTests, Test1200MHz_0_05FullRes)
+{
+    doCheckFullRes(1200, 0.05);
+}
+
+TEST(ApprovalTests, Test1200MHz_0_10FullRes)
+{
+    doCheckFullRes(1200, 0.10);
+}
+
+TEST(ApprovalTests, Test1200MHz_0_50FullRes)
+{
+    doCheckFullRes(1200, 0.50);
+}
+
+TEST(ApprovalTests, Test1200MHz_0_95FullRes)
+{
+    doCheckFullRes(1200, 0.95);
+}
+
+TEST(ApprovalTests, Test2400MHz_0_01FullRes)
+{
+    doCheckFullRes(2400, 0.01);
+}
+
+TEST(ApprovalTests, Test2400MHz_0_05FullRes)
+{
+    doCheckFullRes(2400, 0.05);
+}
+
+TEST(ApprovalTests, Test2400MHz_0_10FullRes)
+{
+    doCheckFullRes(2400, 0.10);
+}
+
+TEST(ApprovalTests, Test2400MHz_0_50FullRes)
+{
+    doCheckFullRes(2400, 0.50);
+}
+
+TEST(ApprovalTests, Test2400MHz_0_95FullRes)
+{
+    doCheckFullRes(2400, 0.95);
+}
+
+TEST(ApprovalTests, Test5100MHz_0_01FullRes)
+{
+    doCheckFullRes(5100, 0.01);
+}
+
+TEST(ApprovalTests, Test5100MHz_0_05FullRes)
+{
+    doCheckFullRes(5100, 0.05);
+}
+
+TEST(ApprovalTests, Test5100MHz_0_10FullRes)
+{
+    doCheckFullRes(5100, 0.10);
+}
+
+TEST(ApprovalTests, Test5100MHz_0_50FullRes)
+{
+    doCheckFullRes(5100, 0.50);
+}
+
+TEST(ApprovalTests, Test5100MHz_0_95FullRes)
+{
+    doCheckFullRes(5100, 0.95);
+}
+
+TEST(ApprovalTests, Test9400MHz_0_01FullRes)
+{
+    doCheckFullRes(9400, 0.01);
+}
+
+TEST(ApprovalTests, Test9400MHz_0_05FullRes)
+{
+    doCheckFullRes(9400, 0.05);
+}
+
+TEST(ApprovalTests, Test9400MHz_0_10FullRes)
+{
+    doCheckFullRes(9400, 0.10);
+}
+
+TEST(ApprovalTests, Test9400MHz_0_50FullRes)
+{
+    doCheckFullRes(9400, 0.50);
+}
+
+TEST(ApprovalTests, Test9400MHz_0_95FullRes)
+{
+    doCheckFullRes(9400, 0.95);
+}
+
+TEST(ApprovalTests, Test15500MHz_0_01FullRes)
+{
+    doCheckFullRes(15500, 0.01);
+}
+
+TEST(ApprovalTests, Test15500MHz_0_05FullRes)
+{
+    doCheckFullRes(15500, 0.05);
+}
+
+TEST(ApprovalTests, Test15500MHz_0_10FullRes)
+{
+    doCheckFullRes(15500, 0.10);
+}
+
+TEST(ApprovalTests, Test15500MHz_0_50FullRes)
+{
+    doCheckFullRes(15500, 0.50);
+}
+
+TEST(ApprovalTests, Test15500MHz_0_95FullRes)
+{
+    doCheckFullRes(15500, 0.95);
 }

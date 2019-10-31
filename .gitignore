@@ -36,3 +36,21 @@ Thumbs.db
 *.sdf
 *.u2d
 *.suo
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Oo]ut/
+[Bb]uild/
+
+CMakeSettings.json

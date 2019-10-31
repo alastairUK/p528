@@ -3,9 +3,15 @@ AlignTrailingComments: true
 BreakBeforeBraces: Allman
 ColumnLimit: 0
 Cpp11BracedListStyle: false
+IncludeBlocks:   Regroup 
+IncludeCategories:
+  - Regex:           '<.*>$'
+    Priority:        2
+  - Regex:           '.*'
+    Priority:        1
 IndentWidth: 4
 PointerAlignment: Left
-SortIncludes: false
+SortIncludes: true
 SpacesBeforeTrailingComments: 2
 TabWidth: 4
 UseTab: Never

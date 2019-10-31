@@ -1,7 +1,8 @@
-#include <math.h>
-#include <complex>
 #include "../include/p528.h"
+
 #include <algorithm>
+#include <complex>
+#include <math.h>
 
 /*=============================================================================
  |

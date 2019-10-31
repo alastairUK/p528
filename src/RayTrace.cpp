@@ -1,5 +1,6 @@
-#include <math.h>
 #include "../include/p528.h"
+
+#include <math.h>
 
 // References:
 //  - [NBS 4]   CRPL Exponential Reference Atmosphere.  Bean and Thayer.  NBS Monograph 4.  1959.

@@ -1,5 +1,7 @@
 #include "../include/LOSTable.h"
+
 #include "../include/p528.h"
+
 #include <math.h>
 
 // Data Tables

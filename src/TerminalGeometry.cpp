@@ -15,13 +15,13 @@
  |                            with the geometry of the terminal
  |
  *===========================================================================*/
-void TerminalGeometry(double N_s, double a_e__km, Terminal *terminal)
+void TerminalGeometry(double N_s, double a_e__km, Terminal* terminal)
 {
     // Step 1
     RayTrace(N_s, terminal->h_r__km, &terminal->d_r__km, &terminal->theta__rad);
 
     // Step 2
-    terminal->phi__rad = terminal->d_r__km / a_e__km;       // [Eqn 21]
+    terminal->phi__rad = terminal->d_r__km / a_e__km;  // [Eqn 21]
 
     // [Eqn 22]
     if (terminal->phi__rad <= 0.1)
@@ -42,7 +42,7 @@ void TerminalGeometry(double N_s, double a_e__km, Terminal *terminal)
     }
 
     // Step 4
-    terminal->delta_h__km = terminal->h_r__km - terminal->h__km;    // [Eqn 26]
+    terminal->delta_h__km = terminal->h_r__km - terminal->h__km;  // [Eqn 26]
 
     // Step 5
     if (terminal->delta_h__km <= 0.0)

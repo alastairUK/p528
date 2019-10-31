@@ -25,8 +25,8 @@
  |      Returns:  [void]
  |
  *===========================================================================*/
-void LineOfSight(Path *path, Terminal terminal_1, Terminal terminal_2, LineOfSightParams *los_params, double f__mhz, double A_dML__db,
-    double q, double d__km, Result *result, double *K_LOS)
+void LineOfSight(Path* path, Terminal terminal_1, Terminal terminal_2, LineOfSightParams* los_params, double f__mhz, double A_dML__db,
+                 double q, double d__km, Result* result, double* K_LOS)
 {
     double psi;
     double R_Tg;
@@ -168,7 +168,7 @@ void LineOfSight(Path *path, Terminal terminal_1, Terminal terminal_2, LineOfSig
 
     double z_1__km = a_0__km + terminal_1.h_r__km;
     double z_2__km = a_0__km + terminal_2.h_r__km;
-    double r_FS__km = MAX(sqrt(pow(z_2__km - z_1__km, 2) + (4.0 * z_1__km * z_2__km * pow(sin(theta_fs * 0.5), 2))), fabs(z_2__km - z_1__km));   // Total ray length for free space path loss
+    double r_FS__km = MAX(sqrt(pow(z_2__km - z_1__km, 2) + (4.0 * z_1__km * z_2__km * pow(sin(theta_fs * 0.5), 2))), fabs(z_2__km - z_1__km));  // Total ray length for free space path loss
 
     double L_bf__db = -32.45 - 20.0 * log10(f__mhz);
     result->A_fs__db = L_bf__db - 20.0 * log10(r_FS__km);
@@ -236,7 +236,7 @@ void LineOfSight(Path *path, Terminal terminal_1, Terminal terminal_2, LineOfSig
             *K_LOS = -40.0;
     }
 
-    double Y_pi_50__db = 0.0;   //  zero mean
+    double Y_pi_50__db = 0.0;  //  zero mean
     double Y_pi__db = NakagamiRice(*K_LOS, q);
 
     double Y_total__db = CombineDistributions(Y_e_50__db, Y_e__db, Y_pi_50__db, Y_pi__db, q);

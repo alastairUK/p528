@@ -19,7 +19,7 @@
  |      Outputs:  tropo         - Struct containing resulting parameters
  |
  *===========================================================================*/
-void Troposcatter(Path path, Terminal terminal_1, Terminal terminal_2, double d__km, double f__mhz, double N_s, TroposcatterParams *tropo)
+void Troposcatter(Path path, Terminal terminal_1, Terminal terminal_2, double d__km, double f__mhz, double N_s, TroposcatterParams* tropo)
 {
     double Q_o, Q_a, Q_b, Q_A, Q_B;
     double z_a__km, z_b__km, Z_a__km, Z_b__km;
@@ -75,7 +75,7 @@ void Troposcatter(Path path, Terminal terminal_1, Terminal terminal_2, double d_
 
         ///////////////////////////////////////
         // Compute the scattering efficiency term
-        // 
+        //
         double epsilon_1 = 5.67e-6 * pow(N_s, 2) - 0.00232 * N_s + 0.031;
         double epsilon_2 = 0.0002 * pow(N_s, 2) - 0.06 * N_s + 6.6;
 
@@ -89,7 +89,7 @@ void Troposcatter(Path path, Terminal terminal_1, Terminal terminal_2, double d_
 
         ///////////////////////////////////////
         // Compute the scattering volume term
-        // 
+        //
 
         double X_A1__km2 = pow(terminal_1.h__km, 2) + 4.0 * (path.a_e__km + terminal_1.h__km) * path.a_e__km * pow(sin(terminal_1.d__km / (path.a_e__km * 2)), 2);
         double X_A2__km2 = pow(terminal_2.h__km, 2) + 4.0 * (path.a_e__km + terminal_2.h__km) * path.a_e__km * pow(sin(terminal_2.d__km / (path.a_e__km * 2)), 2);
@@ -116,15 +116,9 @@ void Troposcatter(Path path, Terminal terminal_1, Terminal terminal_2, double d_
         double q_1 = pow(X_v1, 2) + pow(rho_1__km, 2);
         double q_2 = pow(X_v2, 2) + pow(rho_2__km, 2);
 
-        double B_s = 6 + 8 * pow(s, 2)
-            + 8 * (1.0 - s) * pow(X_v1, 2) * pow(rho_1__km, 2) / pow(q_1, 2)
-            + 8 * (1.0 + s) * pow(X_v2, 2) * pow(rho_2__km, 2) / pow(q_2, 2)
-            + 2 * (1.0 - pow(s, 2)) * (1 + 2 * pow(X_v1, 2) / q_1) * (1 + 2 * pow(X_v2, 2) / q_2);
+        double B_s = 6 + 8 * pow(s, 2) + 8 * (1.0 - s) * pow(X_v1, 2) * pow(rho_1__km, 2) / pow(q_1, 2) + 8 * (1.0 + s) * pow(X_v2, 2) * pow(rho_2__km, 2) / pow(q_2, 2) + 2 * (1.0 - pow(s, 2)) * (1 + 2 * pow(X_v1, 2) / q_1) * (1 + 2 * pow(X_v2, 2) / q_2);
 
-        double C_s = 12
-            * pow((rho_1__km + SQRT2) / rho_1__km, 2)
-            * pow((rho_2__km + SQRT2) / rho_2__km, 2)
-            * (rho_1__km + rho_2__km) / (rho_1__km + rho_2__km + 2 * SQRT2);
+        double C_s = 12 * pow((rho_1__km + SQRT2) / rho_1__km, 2) * pow((rho_2__km + SQRT2) / rho_2__km, 2) * (rho_1__km + rho_2__km) / (rho_1__km + rho_2__km + 2 * SQRT2);
 
         double temp = (A * pow(eta, 2) + B_s * eta) * q_1 * q_2 / (pow(rho_1__km, 2) * pow(rho_2__km, 2));
 

@@ -16,7 +16,7 @@
  |                phi_g     - Imaginary part
  |
  *===========================================================================*/
-void ReflectionCoefficients(double psi, double f__mhz, double *R_g, double *phi_g)
+void ReflectionCoefficients(double psi, double f__mhz, double* R_g, double* phi_g)
 {
     double sin_psi, cos_psi;
     if (psi <= 0.0)

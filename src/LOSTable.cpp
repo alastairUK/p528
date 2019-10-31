@@ -2,7 +2,7 @@
 #include "..\include\p528.h"
 #include <math.h>
 
- // Data Tables
+// Data Tables
 double DATA_psi[140], DATA_delta_r[140], DATA_d[140];
 double X_psi[55], X_delta_r[55], X_d[55];
 double Y_psi[55], Y_delta_r[55], Y_d[55];
@@ -87,7 +87,7 @@ void LOSTable::Build(Path path, Terminal terminal_1, Terminal terminal_2, double
 double LOSTable::GetDistanceFromTable(double delta_r)
 {
     if (delta_r < DATA_delta_r[0])
-        return DATA_d[0];   // "OUT OF RANGE FOR INTERPOLATION"
+        return DATA_d[0];  // "OUT OF RANGE FOR INTERPOLATION"
     else if (delta_r == DATA_delta_r[0])
         return DATA_d[0];
     else
@@ -104,14 +104,14 @@ double LOSTable::GetDistanceFromTable(double delta_r)
             }
         }
 
-        return DATA_d[i_DATA - 1];      // "OUT OF RANGE FOR INTERPOLATION"
+        return DATA_d[i_DATA - 1];  // "OUT OF RANGE FOR INTERPOLATION"
     }
 }
 
 double LOSTable::GetPsiFromTable(double d__km)
 {
     if (d__km > DATA_d[0])
-        return DATA_psi[0];     // "OUT OF RANGE FOR INTERPOLATION"
+        return DATA_psi[0];  // "OUT OF RANGE FOR INTERPOLATION"
     else if (d__km == DATA_d[0])
         return DATA_psi[0];
     else
@@ -124,13 +124,13 @@ double LOSTable::GetPsiFromTable(double d__km)
                 return DATA_psi[K];
         }
 
-        return DATA_psi[i_DATA - 1];        // "OUT OF RANGE FOR INTERPOLATION"
+        return DATA_psi[i_DATA - 1];  // "OUT OF RANGE FOR INTERPOLATION"
     }
 }
 
 void LOSTable::ThreeColumnMergeSort(double A_psi[], double A_delta_r[], double A_d[], int i_A,
-    double B_psi[], double B_delta_r[], double B_d[], int i_B,
-    double C_psi[], double C_delta_r[], double C_d[], int *i_C)
+                                    double B_psi[], double B_delta_r[], double B_d[], int i_B,
+                                    double C_psi[], double C_delta_r[], double C_d[], int* i_C)
 {
     int I = 1;
     int J = 1;
@@ -150,7 +150,7 @@ void LOSTable::ThreeColumnMergeSort(double A_psi[], double A_delta_r[], double A
             I = I + 1;
 
             if (I <= i_A)
-                continue; // still more psi in A_psi
+                continue;  // still more psi in A_psi
             else if (A_psi[I - 1] == B_psi[J - 1])
             {
                 // Stick A_psi into resulting C_psi array, but increment both A and B since they are equal(remove doubles when merging)
@@ -164,7 +164,7 @@ void LOSTable::ThreeColumnMergeSort(double A_psi[], double A_delta_r[], double A
                 {
                     // there are still more A_psi values
                     if (J <= i_B)
-                        continue; //there are still more B_psi values
+                        continue;  //there are still more B_psi values
                     else
                     {
                         // there are no more B_psi values, add all remaining A_psi values
@@ -180,7 +180,7 @@ void LOSTable::ThreeColumnMergeSort(double A_psi[], double A_delta_r[], double A
                 else
                 {
                     if (J > i_B)
-                        return; // All A_psi and B_psi values have been added
+                        return;  // All A_psi and B_psi values have been added
                 }
             }
         }
@@ -193,7 +193,7 @@ void LOSTable::ThreeColumnMergeSort(double A_psi[], double A_delta_r[], double A
             J = J + 1;
 
             if (J <= i_B)
-                continue; // there are still more B_psi values
+                continue;  // there are still more B_psi values
             else
             {
                 // there are no more B_psi values, add all remaining A_psi values

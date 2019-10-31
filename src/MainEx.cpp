@@ -23,8 +23,8 @@
  |                                      + 3 : Troposcatter
  |
  *===========================================================================*/
-int MainEx(double d__km, double h_1__meter, double h_2__meter, double f__mhz, double time_percentage, Result *result,
-    Terminal *terminal_1, Terminal *terminal_2, TroposcatterParams *tropo, Path *path, LineOfSightParams *los_params)
+int MainEx(double d__km, double h_1__meter, double h_2__meter, double f__mhz, double time_percentage, Result* result,
+           Terminal* terminal_1, Terminal* terminal_2, TroposcatterParams* tropo, Path* path, LineOfSightParams* los_params)
 {
     int rtn = SUCCESS;
 
@@ -62,27 +62,27 @@ int MainEx(double d__km, double h_1__meter, double h_2__meter, double f__mhz, do
     /////////////////////////////////////////////
 
     // Step 2
-    path->d_ML__km = terminal_1->d__km + terminal_2->d__km;                             // [Eqn 1]
+    path->d_ML__km = terminal_1->d__km + terminal_2->d__km;  // [Eqn 1]
 
     /////////////////////////////////////////////
     // Smooth earth diffraction line calculations
     //
 
     // Step 3.1
-    double d_3__km = path->d_ML__km + 0.5 * pow(pow(path->a_e__km, 2) / f__mhz, THIRD); // [Eqn 2]
-    double d_4__km = path->d_ML__km + 1.5 * pow(pow(path->a_e__km, 2) / f__mhz, THIRD); // [Eqn 3]
+    double d_3__km = path->d_ML__km + 0.5 * pow(pow(path->a_e__km, 2) / f__mhz, THIRD);  // [Eqn 2]
+    double d_4__km = path->d_ML__km + 1.5 * pow(pow(path->a_e__km, 2) / f__mhz, THIRD);  // [Eqn 3]
 
     // Step 3.2
     double A_3__db = SmoothEarthDiffraction(terminal_1->d__km, terminal_2->d__km, f__mhz, d_3__km);
     double A_4__db = SmoothEarthDiffraction(terminal_1->d__km, terminal_2->d__km, f__mhz, d_4__km);
 
     // Step 3.3
-    double M_d = (A_4__db - A_3__db) / (d_4__km - d_3__km);                             // [Eqn 4]
-    double A_d0 = A_4__db - M_d * d_4__km;                                              // [Eqn 5]
+    double M_d = (A_4__db - A_3__db) / (d_4__km - d_3__km);  // [Eqn 4]
+    double A_d0 = A_4__db - M_d * d_4__km;                   // [Eqn 5]
 
     // Step 3.4
-    double A_dML__db = (M_d * path->d_ML__km) + A_d0;                                   // [Eqn 6]
-    path->d_d__km = -(A_d0 / M_d);                                                      // [Eqn 7]
+    double A_dML__db = (M_d * path->d_ML__km) + A_d0;  // [Eqn 6]
+    path->d_d__km = -(A_d0 / M_d);                     // [Eqn 7]
 
     //
     // End smooth earth diffraction line calculations
@@ -113,7 +113,7 @@ int MainEx(double d__km, double h_1__meter, double h_2__meter, double f__mhz, do
         //
 
         // Step 7.1
-        double A_d__db = M_d * d__km + A_d0;                    // [Eqn 14]
+        double A_d__db = M_d * d__km + A_d0;  // [Eqn 14]
 
         // Step 7.2
         Troposcatter(*path, *terminal_1, *terminal_2, d__km, f__mhz, N_s, tropo);
@@ -156,11 +156,11 @@ int MainEx(double d__km, double h_1__meter, double h_2__meter, double f__mhz, do
         //
 
         // Step 8
-        double r_1__km = sqrt(pow(terminal_1->h_r__km, 2) + 4.0 * (a_0__km + terminal_1->h_r__km) * (a_0__km)* pow(sin(0.5 * terminal_1->d__km / a_0__km), 2)); // [Eqn 17]
-        double r_2__km = sqrt(pow(terminal_2->h_r__km, 2) + 4.0 * (a_0__km + terminal_2->h_r__km) * (a_0__km)* pow(sin(0.5 * terminal_2->d__km / a_0__km), 2)); // [Eqn 17]
-        double r_fs__km = r_1__km + r_2__km + tropo->d_s__km;                           // [Eqn 18]
+        double r_1__km = sqrt(pow(terminal_1->h_r__km, 2) + 4.0 * (a_0__km + terminal_1->h_r__km) * (a_0__km)*pow(sin(0.5 * terminal_1->d__km / a_0__km), 2));  // [Eqn 17]
+        double r_2__km = sqrt(pow(terminal_2->h_r__km, 2) + 4.0 * (a_0__km + terminal_2->h_r__km) * (a_0__km)*pow(sin(0.5 * terminal_2->d__km / a_0__km), 2));  // [Eqn 17]
+        double r_fs__km = r_1__km + r_2__km + tropo->d_s__km;                                                                                                   // [Eqn 18]
 
-        result->A_fs__db = -32.45 - 20.0 * log10(f__mhz) - 20.0 * log10(r_fs__km);      // [Eqn 19]
+        result->A_fs__db = -32.45 - 20.0 * log10(f__mhz) - 20.0 * log10(r_fs__km);  // [Eqn 19]
 
         //
         // Compute free-space loss
@@ -180,14 +180,14 @@ int MainEx(double d__km, double h_1__meter, double h_2__meter, double f__mhz, do
         // [Eqn 256]
         double ANGLE = 0.02617993878;
         double K_t__db;
-        if (tropo->theta_s >= ANGLE) // theta_s > 1.5 deg
+        if (tropo->theta_s >= ANGLE)  // theta_s > 1.5 deg
             K_t__db = 20;
         else if (tropo->theta_s <= 0.0)
             K_t__db = K_LOS;
         else
             K_t__db = (tropo->theta_s * (20.0 - K_LOS) / ANGLE) + K_LOS;
 
-        double Y_pi_50__db = 0.0;   //  zero mean
+        double Y_pi_50__db = 0.0;  //  zero mean
         double Y_pi__db = NakagamiRice(K_t__db, time_percentage);
 
         double Y_total__db = CombineDistributions(Y_e_50__db, Y_e__db, Y_pi_50__db, Y_pi__db, time_percentage);
@@ -200,7 +200,7 @@ int MainEx(double d__km, double h_1__meter, double h_2__meter, double f__mhz, do
         double A_a__db = -TranshorizonAtmosphericAbsorptionLoss(*terminal_1, *terminal_2, *path, *tropo, f__mhz);
 
         result->d__km = d__km;
-        result->A__db = result->A_fs__db + A_a__db + A_T__db + Y_total__db;     // [Eqn 20]
+        result->A__db = result->A_fs__db + A_a__db + A_T__db + Y_total__db;  // [Eqn 20]
 
         return rtn;
     }

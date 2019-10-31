@@ -23,7 +23,6 @@
  |
  *===========================================================================*/
 
-
 double DistanceFunction(double x__km)
 {
     // [Vogler 1964, Equ 13]
@@ -52,7 +51,7 @@ double HeightFunction(double x__km)
         // [Vogler 1964] F_x ~= G_x for large x (see Figure 7)
         F_x__db = G_x__db;
     }
-    else // Blend y__db with G_x__db for 200 < x__km < 2000
+    else  // Blend y__db with G_x__db for 200 < x__km < 2000
     {
         // [FAA-ES-83-3, Equ 72] weighting variable
         double W = 0.0134 * x__km * exp(-0.005 * x__km);

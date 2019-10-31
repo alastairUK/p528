@@ -20,7 +20,7 @@
  |
  *===========================================================================*/
 void LongTermVariability(double h_r1__km, double h_r2__km, double d__km, double f__mhz,
-    double time_percentage, double f_theta_h, double A_T, double *Y_e__db, double *A_Y)
+                         double time_percentage, double f_theta_h, double A_T, double* Y_e__db, double* A_Y)
 {
     // Step 1
     double d_Lq1__km, d_Lq2__km, theta__rad;
@@ -28,9 +28,9 @@ void LongTermVariability(double h_r1__km, double h_r2__km, double d__km, double 
     RayTrace(N_9000, h_r2__km, &d_Lq2__km, &theta__rad);
 
     // Step 2
-    double d_qs__km = 65.0 * pow((100.0 / f__mhz), 1.0 / 3.0);          // [Eqn 184]
-    double d_Lq__km = d_Lq1__km + d_Lq2__km;                            // [Eqn 185]
-    double d_q__km = d_Lq__km + d_qs__km;								// [Eqn 186]
+    double d_qs__km = 65.0 * pow((100.0 / f__mhz), 1.0 / 3.0);  // [Eqn 184]
+    double d_Lq__km = d_Lq1__km + d_Lq2__km;                    // [Eqn 185]
+    double d_q__km = d_Lq__km + d_qs__km;                       // [Eqn 186]
 
     // [Eqn 187]
     double d_e__km;
@@ -69,7 +69,7 @@ void LongTermVariability(double h_r1__km, double h_r2__km, double d__km, double 
     double f_inf[] = { 3.2, 5.4, 0.0 };
     double f_m[] = { 8.2, 10.0, 3.9 };
 
-    double Z__db[3];    // = [Y_0(0.9) Y_0(0.1) V(0.5)]
+    double Z__db[3];  // = [Y_0(0.9) Y_0(0.1) V(0.5)]
     for (int i = 0; i < 3; i++)
     {
         double f_2 = f_inf[i] + ((f_m[i] - f_inf[i]) * exp(-c_2[i] * pow(d_e__km, n_2[i])));

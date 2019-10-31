@@ -24,7 +24,7 @@
  |
  *===========================================================================*/
 int TranshorizonSearch(Path* path, Terminal terminal_1, Terminal terminal_2, double f__mhz,
-    double N_s, double A_dML__db, double *M_d, double *A_d0, double* d_crx__km, int *CASE)
+                       double N_s, double A_dML__db, double* M_d, double* A_d0, double* d_crx__km, int* CASE)
 {
     *CASE = CONST_MODE__SEARCH;
     int k = 0;
@@ -40,7 +40,7 @@ int TranshorizonSearch(Path* path, Terminal terminal_1, Terminal terminal_2, dou
     double A_s__db[2] = { 0 };
     double M_s = 0;
 
-    int SEARCH_LIMIT = 100; // 100 km beyond starting point
+    int SEARCH_LIMIT = 100;  // 100 km beyond starting point
 
     for (int i_search = 0; i_search < SEARCH_LIMIT; i_search++)
     {
@@ -59,7 +59,7 @@ int TranshorizonSearch(Path* path, Terminal terminal_1, Terminal terminal_2, dou
         }
 
         k++;
-        if (k <= 1) // need two points to draw a line and we don't have them both yet
+        if (k <= 1)  // need two points to draw a line and we don't have them both yet
         {
             d_search__km[1] = d_search__km[0];
             d_search__km[0]++;
@@ -67,7 +67,7 @@ int TranshorizonSearch(Path* path, Terminal terminal_1, Terminal terminal_2, dou
         }
 
         // Step 6.3
-        M_s = (A_s__db[0] - A_s__db[1]) / (d_search__km[0] - d_search__km[1]);          // [Eqn 10]
+        M_s = (A_s__db[0] - A_s__db[1]) / (d_search__km[0] - d_search__km[1]);  // [Eqn 10]
 
         // Verify the tropo line is sloping to increase loss with distance (inverted sign)
         if (M_s <= -0.01)
@@ -90,8 +90,8 @@ int TranshorizonSearch(Path* path, Terminal terminal_1, Terminal terminal_2, dou
             else
             {
                 // Adjust the diffraction line to the troposcatter model
-                *M_d = (A_s__db[1] - A_dML__db) / (d_search__km[1] - path->d_ML__km);   // [Eqn 11]
-                *A_d0 = A_s__db[1] - (d_search__km[1] * *M_d);                          // [Eqn 12]
+                *M_d = (A_s__db[1] - A_dML__db) / (d_search__km[1] - path->d_ML__km);  // [Eqn 11]
+                *A_d0 = A_s__db[1] - (d_search__km[1] * *M_d);                         // [Eqn 12]
 
                 *CASE = 2;
             }

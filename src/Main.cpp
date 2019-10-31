@@ -32,5 +32,5 @@ int Main(double d__km, double h_1__meter, double h_2__meter, double f__mhz, doub
     LineOfSightParams los_params;
 
     return MainEx(d__km, h_1__meter, h_2__meter, f__mhz, time_percentage, result,
-        &terminal_1, &terminal_2, &tropo, &path, &los_params);
+                  &terminal_1, &terminal_2, &tropo, &path, &los_params);
 }

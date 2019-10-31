@@ -1,6 +1,7 @@
 #include <math.h>
 #include "../include/LOSTable.h"
 #include "../include/p528.h"
+#include <algorithm>
 
 /*=============================================================================
  |
@@ -168,7 +169,7 @@ void LineOfSight(Path* path, Terminal terminal_1, Terminal terminal_2, LineOfSig
 
     double z_1__km = a_0__km + terminal_1.h_r__km;
     double z_2__km = a_0__km + terminal_2.h_r__km;
-    double r_FS__km = MAX(sqrt(pow(z_2__km - z_1__km, 2) + (4.0 * z_1__km * z_2__km * pow(sin(theta_fs * 0.5), 2))), fabs(z_2__km - z_1__km));  // Total ray length for free space path loss
+    double r_FS__km = std::max(sqrt(pow(z_2__km - z_1__km, 2) + (4.0 * z_1__km * z_2__km * pow(sin(theta_fs * 0.5), 2))), fabs(z_2__km - z_1__km));  // Total ray length for free space path loss
 
     double L_bf__db = -32.45 - 20.0 * log10(f__mhz);
     result->A_fs__db = L_bf__db - 20.0 * log10(r_FS__km);
@@ -187,7 +188,7 @@ void LineOfSight(Path* path, Terminal terminal_1, Terminal terminal_2, LineOfSig
     else if (los_params->theta_h1 >= 1.0)
         f_theta_h = 0.0;
     else
-        f_theta_h = MAX(0.5 - 0.3183098862 * (atan(20.0 * log10(32.0 * los_params->theta_h1))), 0);
+        f_theta_h = std::max(0.5 - 0.3183098862 * (atan(20.0 * log10(32.0 * los_params->theta_h1))), 0.0);
 
     double Y_e__db, Y_e_50__db, A_Y;
     LongTermVariability(terminal_1.h_r__km, terminal_2.h_r__km, d__km, f__mhz, q, f_theta_h, los_params->A_LOS__db, &Y_e__db, &A_Y);

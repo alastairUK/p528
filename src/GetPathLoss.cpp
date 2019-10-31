@@ -1,6 +1,7 @@
 #include <math.h>
 #include <complex>
 #include "../include/p528.h"
+#include <algorithm>
 
 /*=============================================================================
  |
@@ -60,7 +61,7 @@ void GetPathLoss(double psi, Path path, Terminal terminal_1, Terminal terminal_2
     {
         double lambda = 0.2997925 / f__mhz;
 
-        double F_r = MIN(params->r_0__km / params->r_12__km, 1);  // Ray-length factor, [Eqn 79]
+        double F_r = std::min(params->r_0__km / params->r_12__km, 1.0);  // Ray-length factor, [Eqn 79]
 
         double R_Tg = R_g * D_v * F_r;  // [Eqn 80]
 
@@ -73,7 +74,7 @@ void GetPathLoss(double psi, Path path, Terminal terminal_1, Terminal terminal_2
             double phi_Tg = (2 * PI * params->delta_r / lambda) + phi_g;  // [Eqn 81]
 
             std::complex<double> cplx = std::complex<double>(R_Tg * cos(phi_Tg), -R_Tg * sin(phi_Tg));
-            WRL = MIN(abs(1.0 + cplx), 1.0);
+            WRL = std::min(abs(1.0 + cplx), 1.0);
         }
 
         double W_R0 = pow(WRL, 2) + 0.0001;

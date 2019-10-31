@@ -1,5 +1,6 @@
 #include <math.h>
 #include "../include/p528.h"
+#include <algorithm>
 
 /*=============================================================================
  |
@@ -54,7 +55,7 @@ void RayOptics(Path path, Terminal terminal_1, Terminal terminal_2, double psi, 
     double delta_z = fabs(params->z__km[0] - params->z__km[1]);  // [Eqn 68]
 
     // Step 6
-    params->d__km = MAX(params->a_a__km * (params->theta[0] + params->theta[1]), 0);  // [Eqn 69]
+    params->d__km = std::max(params->a_a__km * (params->theta[0] + params->theta[1]), 0.0);  // [Eqn 69]
 
     // Step 7
     double alpha = atan((Hprime__km[1] - Hprime__km[0]) / (params->D__km[0] + params->D__km[1]));  // [Eqn 70]

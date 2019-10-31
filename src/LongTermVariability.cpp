@@ -1,5 +1,6 @@
 #include <math.h>
 #include "../include/p528.h"
+#include <algorithm>
 
 /*=============================================================================
  |
@@ -131,7 +132,7 @@ void LongTermVariability(double h_r1__km, double h_r2__km, double d__km, double 
 
     double A_YI = (A_T + Y_eI_10__db) - 3.0;
 
-    *A_Y = MAX(A_YI, 0);
+    *A_Y = std::max(A_YI, 0.0);
 
     *Y_e__db = Y_eI__db - *A_Y;
 

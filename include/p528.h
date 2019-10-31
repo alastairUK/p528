@@ -4,55 +4,58 @@
 
 // Define DLLEXPORT for any platform
 #ifdef _WIN32
-#ifdef WIN_IMPORT
-#define DLLEXPORT __declspec(dllimport)
-#else
 #define DLLEXPORT __declspec(dllexport)
-#endif
 #else
 #define DLLEXPORT
 #endif
 
-#define MAX(x, y) (((x) > (y)) ? (x) : (y))
-#define MIN(x, y) (((x) < (y)) ? (x) : (y))
-
-#define PI            3.1415926535897932384
-#define a_0__km       6370.0
-#define T_eo__km      3.25
-#define T_ew__km      1.36
-#define N_0           301
-#define N_9000        329
-#define epsilon       15.0
-#define sigma         0.005
-#define LOS_EPSILON   0.0001
-#define LOS_ITERATION 25
-#define THIRD         1.0 / 3.0
+constexpr double PI = 3.1415926535897932384;
+constexpr double a_0__km = 6370.0;
+constexpr double T_eo__km = 3.25;
+constexpr double T_ew__km = 1.36;
+constexpr double N_0 = 301;
+constexpr double N_9000 = 329;
+constexpr double epsilon = 15.0;
+constexpr double sigma = 0.005;
+constexpr double LOS_EPSILON = 0.0001;
+constexpr double LOS_ITERATION = 25;
+constexpr double THIRD = 1.0 / 3.0;
 
 // Consts
-#define CONST_MODE__SEARCH      0
-#define CONST_MODE__DIFFRACTION 1
-#define CONST_MODE__SCATTERING  2
+enum CONST_MODE
+{
+    CONST_MODE__SEARCH = 0,
+    CONST_MODE__DIFFRACTION = 1,
+    CONST_MODE__SCATTERING = 2
+};
 
-#define PROP_MODE__NOT_SET     0
-#define PROP_MODE__LOS         1
-#define PROP_MODE__DIFFRACTION 2
-#define PROP_MODE__SCATTERING  3
+enum PROP_MODE
+{
+    PROP_MODE__NOT_SET = 0,
+    PROP_MODE__LOS = 1,
+    PROP_MODE__DIFFRACTION = 2,
+    PROP_MODE__SCATTERING = 3
+};
+
 
 //
 // RETURN CODES
 ///////////////////////////////////////////////
-#define SUCCESS                        0
-#define ERROR_VALIDATION__D_KM         1
-#define ERROR_VALIDATION__H_1          2
-#define ERROR_VALIDATION__H_2          3
-#define ERROR_VALIDATION__TERM_GEO     4
-#define ERROR_VALIDATION__F_MHZ_LOW    5
-#define ERROR_VALIDATION__F_MHZ_HIGH   6
-#define ERROR_VALIDATION__PERCENT_LOW  7
-#define ERROR_VALIDATION__PERCENT_HIGH 8
-#define ERROR_HEIGHT_AND_DISTANCE      10
-#define WARNING__DFRAC_TROPO_REGION    0xFF1
-#define WARNING__LOW_FREQUENCY         0xFF2
+enum ReturnCodes
+{
+    SUCCESS                        = 0,
+    ERROR_VALIDATION__D_KM         = 1,
+    ERROR_VALIDATION__H_1          = 2,
+    ERROR_VALIDATION__H_2          = 3,
+    ERROR_VALIDATION__TERM_GEO     = 4,
+    ERROR_VALIDATION__F_MHZ_LOW    = 5,
+    ERROR_VALIDATION__F_MHZ_HIGH   = 6,
+    ERROR_VALIDATION__PERCENT_LOW  = 7,
+    ERROR_VALIDATION__PERCENT_HIGH = 8,
+    ERROR_HEIGHT_AND_DISTANCE      = 10,
+    WARNING__DFRAC_TROPO_REGION    = 0xFF1,
+    WARNING__LOW_FREQUENCY         = 0xFF2
+};
 
 // Struct
 struct Path

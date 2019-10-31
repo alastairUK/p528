@@ -1,6 +1,18 @@
+#pragma once
 
 // Operating system preprocessor directives *********************************************************
-#define DLLEXPORT extern "C" __declspec(dllexport)
+
+// Define DLLEXPORT for any platform
+#ifdef _WIN32
+#ifdef WIN_IMPORT
+#define DLLEXPORT __declspec(dllimport)
+#else
+#define DLLEXPORT __declspec(dllexport)
+#endif
+#else
+#define DLLEXPORT
+#endif
+
 #define MAX(x, y) (((x) > (y)) ? (x) : (y))
 #define MIN(x, y) (((x) < (y)) ? (x) : (y))
 

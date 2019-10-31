@@ -26,8 +26,8 @@ void RayTrace(double N_s, double h_rx__km, double* arc_distance, double* theta_r
 {
     if (h_rx__km == 0)  // both terminals are on the surface of the Earth
     {
-        arc_distance = 0;
-        theta_rx = 0;
+        arc_distance = nullptr;
+        theta_rx = nullptr;
         return;
     }
 
@@ -43,11 +43,8 @@ void RayTrace(double N_s, double h_rx__km, double* arc_distance, double* theta_r
         110.0, 225.0, 350.0, 475.0
     };
 
-    double r_ii__km, r_i__km;
-    double theta_ii, theta_i;
-    double N_ii;
-    double n_ii, n_i;
-    double A_i;
+    double r_ii__km = 0.0;
+    double theta_ii = 0.0;
 
     double delta_N = -7.32 * exp(0.005577 * N_s);
     double C_e = log(N_s / (N_s + delta_N));
@@ -63,17 +60,17 @@ void RayTrace(double N_s, double h_rx__km, double* arc_distance, double* theta_r
     double tau = 0.0;                          // bending angle
 
     // initializing loop parameters
-    theta_i = theta_takeoff;
-    n_i = n_tx;
-    r_i__km = r_tx__km;
+    double theta_i = theta_takeoff;
+    double n_i = n_tx;
+    double r_i__km = r_tx__km;
 
     // trace the ray through the atmosphere
     for (int i = 0; i < LAYERS - 1; i++)
     {
         // compute the top of atmospheric layer
         r_ii__km = a_0__km + h_i__km[i + 1];      // radius
-        N_ii = N_s * exp(-C_e * h_i__km[i + 1]);  // refractivity (N-Units)
-        n_ii = 1.0 + (N_ii * 1.0e-6);             // refractive index
+        double N_ii = N_s * exp(-C_e * h_i__km[i + 1]);  // refractivity (N-Units)
+        double n_ii = 1.0 + (N_ii * 1.0e-6);             // refractive index
 
         // is the rx in the current layer?
         if (r_ii__km > r_rx__km)
@@ -84,7 +81,7 @@ void RayTrace(double N_s, double h_rx__km, double* arc_distance, double* theta_r
         }
 
         theta_ii = acos((r_i__km / r_ii__km) * (n_i / n_ii) * cos(theta_i));  // [Thayer, Equ 1], rearranged
-        A_i = (log(n_ii) - log(n_i)) / (log(r_ii__km) - log(r_i__km));
+        double A_i = (log(n_ii) - log(n_i)) / (log(r_ii__km) - log(r_i__km));
 
         double tau_i = (theta_ii - theta_i) * -A_i / (A_i + 1.0);  // [Thayer, Equ 11]
         tau += tau_i;
@@ -106,6 +103,4 @@ void RayTrace(double N_s, double h_rx__km, double* arc_distance, double* theta_r
     double central_angle = (theta_ii - theta_takeoff + tau);  // [Thayer, Equ 2], rearranged
     *arc_distance = a_0__km * central_angle;
     *theta_rx = theta_ii;
-
-    return;
 }

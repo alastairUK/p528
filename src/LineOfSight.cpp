@@ -84,7 +84,7 @@ void LineOfSight(Path* path, Terminal terminal_1, Terminal terminal_2, LineOfSig
     {
         psi = table.GetPsiFromTable(d_temp__km);
 
-        LineOfSightParams result;
+        LineOfSightParams result{};
         RayOptics(*path, terminal_1, terminal_2, psi, &result);
 
         // if the resulting distance is beyond d_0 OR if we incremented again we'd be outside of LOS...

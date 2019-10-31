@@ -93,7 +93,7 @@ void LongTermVariability(double h_r1__km, double h_r2__km, double d__km, double 
     }
     else
     {
-        double c_q;
+        double c_q = 0.0;
         if (time_percentage >= 0.1)
         {
             double z_1 = InverseComplementaryCumulativeDistributionFunction(0.1);

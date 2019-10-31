@@ -23,9 +23,6 @@
  *===========================================================================*/
 void Troposcatter(Path path, Terminal terminal_1, Terminal terminal_2, double d__km, double f__mhz, double N_s, TroposcatterParams* tropo)
 {
-    double Q_o, Q_a, Q_b, Q_A, Q_B;
-    double z_a__km, z_b__km, Z_a__km, Z_b__km;
-
     tropo->d_s__km = d__km - terminal_1.d__km - terminal_2.d__km;
 
     if (tropo->d_s__km <= 0.0)
@@ -49,19 +46,19 @@ void Troposcatter(Path path, Terminal terminal_1, Terminal terminal_2, double d_
         double dN = A_m - (1.0 / path.a_e__km);
         double gamma_e__km = (N_s * 1e-6) / dN;
 
-        z_a__km = 1.0 / (2 * path.a_e__km) * pow(tropo->d_z__km / 2, 2);
-        z_b__km = 1.0 / (2 * path.a_e__km) * pow(tropo->d_z__km, 2);
+        double z_a__km = 1.0 / (2 * path.a_e__km) * pow(tropo->d_z__km / 2, 2);
+        double z_b__km = 1.0 / (2 * path.a_e__km) * pow(tropo->d_z__km, 2);
 
-        Q_o = A_m - dN;
+        double Q_o = A_m - dN;
 
-        Q_a = A_m - dN / exp(std::min(35.0, z_a__km / gamma_e__km));
-        Q_b = A_m - dN / exp(std::min(35.0, z_b__km / gamma_e__km));
+        double Q_a = A_m - dN / exp(std::min(35.0, z_a__km / gamma_e__km));
+        double Q_b = A_m - dN / exp(std::min(35.0, z_b__km / gamma_e__km));
 
-        Z_a__km = (7.0 * Q_o + 6.0 * Q_a - Q_b) * (pow(tropo->d_z__km, 2) / 96.0);
-        Z_b__km = (Q_o + 2.0 * Q_a) * (pow(tropo->d_z__km, 2) / 6.0);
+        double Z_a__km = (7.0 * Q_o + 6.0 * Q_a - Q_b) * (pow(tropo->d_z__km, 2) / 96.0);
+        double Z_b__km = (Q_o + 2.0 * Q_a) * (pow(tropo->d_z__km, 2) / 6.0);
 
-        Q_A = A_m - dN / exp(std::min(35.0, Z_a__km / gamma_e__km));
-        Q_B = A_m - dN / exp(std::min(35.0, Z_b__km / gamma_e__km));
+        double Q_A = A_m - dN / exp(std::min(35.0, Z_a__km / gamma_e__km));
+        double Q_B = A_m - dN / exp(std::min(35.0, Z_b__km / gamma_e__km));
 
         tropo->h_v__km = (Q_o + 2.0 * Q_A) * (pow(tropo->d_z__km, 2) / 6.0);
 

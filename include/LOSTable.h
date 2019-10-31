@@ -7,9 +7,6 @@ class LOSTable
     double GetDistanceFromTable(double delta_r);
     double GetPsiFromTable(double d__km);
 
-    LOSTable();
-    ~LOSTable();
-
   private:
     void ThreeColumnMergeSort(double A_psi[], double A_delta_r[], double A_d[], int i_A,
                               double B_psi[], double B_delta_r[], double B_d[], int i_B,

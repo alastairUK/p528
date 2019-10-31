@@ -13,99 +13,94 @@
 #include <sstream>
 #include <vector>
 
-//GTEST_API_ int _tmain(int argc, char* argv[])
-//{
-//    return RUN_ALL_TESTS();
-//}
-
 namespace
 {
-const std::vector<int> h2__m = { 1000, 1000, 1000, 1000, 1000, 10000, 10000, 10000, 10000, 10000, 10000, 20000, 20000, 20000, 20000, 20000, 20000, 20000 };
-const std::vector<double> h1__m = { 1.5, 15, 30, 60, 1000, 1.5, 15, 30, 60, 1000, 10000, 1.5, 15, 30, 60, 1000, 10000, 20000 };
-const std::vector<int> d__km = []() { std::vector<int> v(1001); std::iota(v.begin(), v.end(), 0); return v; }();
+    const std::vector<int> h2__m = { 1000, 1000, 1000, 1000, 1000, 10000, 10000, 10000, 10000, 10000, 10000, 20000, 20000, 20000, 20000, 20000, 20000, 20000 };
+    const std::vector<double> h1__m = { 1.5, 15, 30, 60, 1000, 1.5, 15, 30, 60, 1000, 10000, 1.5, 15, 30, 60, 1000, 10000, 20000 };
+    const std::vector<int> d__km = []() { std::vector<int> v(1001); std::iota(v.begin(), v.end(), 0); return v; }();
 
-void writeHeader(std::ostream& os, int freq__MHz, double Lb)
-{
-    fmt::fprintf(os, "%dMHz / Lb(%.2f) dB\n", freq__MHz, Lb);
-
-    fmt::fprintf(os, ",h2(m),");
-    for (auto it = h2__m.begin(); it < h2__m.end(); ++it)
+    void writeHeader(std::ostream& os, int freq__MHz, double Lb)
     {
-        if (it != h2__m.begin())
-            os << ',';
+        fmt::fprintf(os, "%dMHz / Lb(%.2f) dB\n", freq__MHz, Lb);
 
-        fmt::fprintf(os, "%d", *it);
-    }
-    os << '\n';
-
-    fmt::fprintf(os, ",h1(m),");
-    for (auto it = h1__m.begin(); it < h1__m.end(); ++it)
-    {
-        if (it != h1__m.begin())
-            os << ',';
-
-        fmt::fprintf(os, "%g", *it);
-    }
-    os << '\n';
-
-    os << "D (km),FSL";
-}
-
-std::string formatString(double val)
-{
-    auto str = fmt::format("{:.1f}", val);
-
-    if (str.substr(str.size() - 2, 2) == ".0")
-    {
-        str = str.substr(0, str.size() - 2);
-
-        if (str == "-0")
-            str = "0";
-    }
-
-    return str;
-}
-
-void doCheck(int freqMHz, double Lb)
-{
-    std::ostringstream os;
-    writeHeader(os, freqMHz, Lb);
-
-    auto numCols = std::max(h2__m.size(), h1__m.size());
-
-    for (const auto d : d__km)
-    {
-        fmt::fprintf(os, "\n%d", d);
-
-        for (decltype(numCols) i = 0; i < numCols; ++i)
+        fmt::fprintf(os, ",h2(m),");
+        for (auto it = h2__m.begin(); it < h2__m.end(); ++it)
         {
-            Result res{};
-            auto ret = Main(d, h1__m[i], h2__m[i], freqMHz, Lb, &res);
+            if (it != h2__m.begin())
+                os << ',';
 
-            os << ',';
+            fmt::fprintf(os, "%d", *it);
+        }
+        os << '\n';
 
-            auto loss = fmt::format("{:.1f}", -res.A__db);
-            if (loss.substr(loss.size() - 2, 2) == ".0")
+        fmt::fprintf(os, ",h1(m),");
+        for (auto it = h1__m.begin(); it < h1__m.end(); ++it)
+        {
+            if (it != h1__m.begin())
+                os << ',';
+
+            fmt::fprintf(os, "%g", *it);
+        }
+        os << '\n';
+
+        os << "D (km),FSL";
+    }
+
+    std::string formatString(double val)
+    {
+        auto str = fmt::format("{:.1f}", val);
+
+        if (str.substr(str.size() - 2, 2) == ".0")
+        {
+            str = str.substr(0, str.size() - 2);
+
+            if (str == "-0")
+                str = "0";
+        }
+
+        return str;
+    }
+
+    void doCheck(int freqMHz, double Lb)
+    {
+        std::ostringstream os;
+        writeHeader(os, freqMHz, Lb);
+
+        auto numCols = std::max(h2__m.size(), h1__m.size());
+
+        for (const auto d : d__km)
+        {
+            fmt::fprintf(os, "\n%d", d);
+
+            for (decltype(numCols) i = 0; i < numCols; ++i)
             {
-                loss = loss.substr(0, loss.size() - 2);
+                Result res{};
+                auto ret = Main(d, h1__m[i], h2__m[i], freqMHz, Lb, &res);
 
-                if (loss == "-0")
-                    loss = "0";
-            }
+                os << ',';
 
-            if (i == 0)
-            {
-                fmt::fprintf(os, "%s,%s", formatString(-res.A_fs__db), formatString(-res.A__db));
-            }
-            else
-            {
-                fmt::fprintf(os, "%s", formatString(-res.A__db));
+                auto loss = fmt::format("{:.1f}", -res.A__db);
+                if (loss.substr(loss.size() - 2, 2) == ".0")
+                {
+                    loss = loss.substr(0, loss.size() - 2);
+
+                    if (loss == "-0")
+                        loss = "0";
+                }
+
+                if (i == 0)
+                {
+                    fmt::fprintf(os, "%s,%s", formatString(-res.A_fs__db), formatString(-res.A__db));
+                }
+                else
+                {
+                    fmt::fprintf(os, "%s", formatString(-res.A__db));
+                }
             }
         }
-    }
 
-    ApprovalTests::Approvals::verify(os.str());
-}
+        ApprovalTests::Approvals::verify(os.str());
+    }
 }  // namespace
 
 TEST(ApprovalTests, Test125MHz_0_01)

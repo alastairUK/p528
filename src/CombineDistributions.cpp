@@ -20,12 +20,10 @@ double CombineDistributions(double A_M, double A_q, double B_M, double B_q, doub
 {
     double C_M = A_M + B_M;
 
-    double Y_1, Y_2, Y_3;
+    double Y_1 = A_q - A_M;
+    double Y_2 = B_q - B_M;
 
-    Y_1 = A_q - A_M;
-    Y_2 = B_q - B_M;
-
-    Y_3 = sqrt(pow(Y_1, 2) + pow(Y_2, 2));
+    double Y_3 = sqrt(pow(Y_1, 2) + pow(Y_2, 2));
 
     if (q < 0.5)
         return C_M + Y_3;

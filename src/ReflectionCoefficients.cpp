@@ -52,6 +52,4 @@ void ReflectionCoefficients(double psi, double f__mhz, double* R_g, double* phi_
     *R_g = sqrt((1.0 + (B * pow(sin_psi, 2)) - (A * sin_psi)) / (1.0 + (B * pow(sin_psi, 2)) + (A * sin_psi)));
 
     *phi_g = atan2(-Q, sin_psi - P) - atan2(Q, sin_psi + P);
-
-    return;
 }

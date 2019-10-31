@@ -29,7 +29,7 @@ int TranshorizonSearch(Path* path, Terminal terminal_1, Terminal terminal_2, dou
     *CASE = CONST_MODE__SEARCH;
     int k = 0;
 
-    TroposcatterParams tropo_params;
+    TroposcatterParams tropo_params{};
     tropo_params.A_s__db = 0;
 
     // Step 6.1.  Initialize search parameters

@@ -10,6 +10,7 @@ IncludeCategories:
   - Regex:           '.*'
     Priority:        1
 IndentWidth: 4
+NamespaceIndentation: All
 PointerAlignment: Left
 SortIncludes: true
 SpacesBeforeTrailingComments: 2

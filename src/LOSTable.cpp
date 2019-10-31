@@ -33,7 +33,7 @@ void LOSTable::Build(Path path, Terminal terminal_1, Terminal terminal_2, double
     {
         double psi = asin(lambda * R[i] / (2 * terminal_1.h__km));
 
-        LineOfSightParams result;
+        LineOfSightParams result{};
         RayOptics(path, terminal_1, terminal_2, psi, &result);
 
         X_psi[i_X] = psi;
@@ -46,7 +46,7 @@ void LOSTable::Build(Path path, Terminal terminal_1, Terminal terminal_2, double
     {
         double psi = sqrt(lambda * R[i] / (2 * terminal_1.d__km));
 
-        LineOfSightParams result;
+        LineOfSightParams result{};
         RayOptics(path, terminal_1, terminal_2, psi, &result);
 
         Y_psi[i_Y] = psi;
@@ -59,7 +59,7 @@ void LOSTable::Build(Path path, Terminal terminal_1, Terminal terminal_2, double
     {
         double psi = degrees[i] * RAD;
 
-        LineOfSightParams result;
+        LineOfSightParams result{};
         RayOptics(path, terminal_1, terminal_2, psi, &result);
 
         Z_psi[i_Z] = psi;
@@ -218,12 +218,4 @@ void LOSTable::ThreeColumnMergeSort(double A_psi[], double A_delta_r[], double A
             C_d[*i_C - 1] = B_d[k - 1];
         }
     }
-}
-
-LOSTable::LOSTable()
-{
-}
-
-LOSTable::~LOSTable()
-{
 }

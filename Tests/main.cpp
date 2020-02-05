@@ -3,7 +3,6 @@
 #define FMT_HEADER_ONLY
 #include "fmt/format.h"
 #include "fmt/printf.h"
-#include "fmt/ranges.h"
 
 #define APPROVALS_GOOGLETEST
 #include "ApprovalTests.v.6.0.0.hpp"
@@ -61,10 +60,10 @@ namespace
         return str;
     }
 
-    void doCheck(int freqMHz, double Lb)
+    void doCheck(int f__mhz, double Lb)
     {
         std::ostringstream os;
-        writeHeader(os, freqMHz, Lb);
+        writeHeader(os, f__mhz, Lb);
 
         auto numCols = std::max(h2__m.size(), h1__m.size());
 
@@ -75,7 +74,7 @@ namespace
             for (decltype(numCols) i = 0; i < numCols; ++i)
             {
                 Result res{};
-                auto ret = Main(d, h1__m[i], h2__m[i], freqMHz, Lb, &res);
+                auto ret = Main(d, h1__m[i], h2__m[i], f__mhz, Lb, &res);
 
                 os << ',';
 
@@ -102,10 +101,10 @@ namespace
         ApprovalTests::Approvals::verify(os.str());
     }
 
-    void doCheckFullRes(int freqMHz, double Lb)
+    void doCheckFullRes(int f__mhz, double Lb)
     {
         std::ostringstream os;
-        writeHeader(os, freqMHz, Lb);
+        writeHeader(os, f__mhz, Lb);
 
         auto numCols = std::max(h2__m.size(), h1__m.size());
 
@@ -116,7 +115,7 @@ namespace
             for (decltype(numCols) i = 0; i < numCols; ++i)
             {
                 Result res{};
-                auto ret = Main(d, h1__m[i], h2__m[i], freqMHz, Lb, &res);
+                auto ret = Main(d, h1__m[i], h2__m[i], f__mhz, Lb, &res);
 
                 os << ',';
 

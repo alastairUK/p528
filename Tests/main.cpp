@@ -5,7 +5,7 @@
 #include "fmt/printf.h"
 
 #define APPROVALS_GOOGLETEST
-#include "ApprovalTests.v.6.0.0.hpp"
+#include "ApprovalTests.v.8.2.0.hpp"
 #include "p528.h"
 
 #include <cassert>

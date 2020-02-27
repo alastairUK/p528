@@ -121,11 +121,11 @@ namespace
 
                 if (i == 0)
                 {
-                    fmt::fprintf(os, "%f,%f", res.A_fs__db, res.A__db);
+                    fmt::fprintf(os, "%f,%f", -res.A_fs__db, -res.A__db);
                 }
                 else
                 {
-                    fmt::fprintf(os, "%f", res.A__db);
+                    fmt::fprintf(os, "%f", -res.A__db);
                 }
             }
         }

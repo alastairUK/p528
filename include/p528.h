@@ -1,4 +1,16 @@
-#define DLLEXPORT extern "C" __declspec(dllexport)
+#pragma once
+
+// Define DLLEXPORT for any platform
+#ifdef _WIN32
+#ifdef WIN_IMPORT
+    #define DLLEXPORT extern "C" __declspec(dllimport)
+#else
+    #define DLLEXPORT extern "C" __declspec(dllexport)
+#endif
+#else
+    #define DLLEXPORT
+#endif
+
 #define MAX(x, y) (((x) > (y)) ? (x) : (y))
 #define MIN(x, y) (((x) < (y)) ? (x) : (y))
 

@@ -1,6 +1,7 @@
+#include <math.h>
+
 #include "../include/LOSTable.h"
 #include "../include/p528.h"
-#include <math.h>
 
 // Data Tables
 double DATA_psi[140], DATA_delta_r[140], DATA_d[140];

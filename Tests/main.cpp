@@ -12,6 +12,7 @@
 #include <sstream>
 #include <vector>
 #include <numeric>
+#include <random>
 
 namespace
 {
@@ -533,4 +534,49 @@ TEST(ApprovalTests, Test15500MHz_0_50FullRes)
 TEST(ApprovalTests, Test15500MHz_0_95FullRes)
 {
     doCheckFullRes(15500, 0.95);
+}
+
+TEST(LookForTroublesomInputs, Nan)
+{
+    Result res{};
+
+    const auto d__km = 298;
+    const auto h_1__meter = 20.000000001346052;
+    const auto h_2__meter = 9000;
+    const auto f__mhz = 3313;
+    const auto time_percentage = 0.1;
+
+    auto ret = Main(d__km, h_1__meter, h_2__meter, f__mhz, time_percentage, &res);
+
+    EXPECT_EQ(std::isnan(res.A__db), false);
+}
+
+TEST(LookForTroublesomInputs, TestLotsOfInputs)
+{
+    std::mt19937 mt(12345678);
+
+    auto         ud_d__km = std::uniform_real_distribution<>{ 0, 2000 };
+    auto         ud_h_first = std::uniform_real_distribution<>{ 1.5, 20000 };
+    auto         ud_h_second = std::uniform_real_distribution<>{ 1.5, 20000 };
+    auto         ud_f__mhz  = std::uniform_real_distribution<>{ 125 , 15500 };
+    auto         ud_time_percentage  = std::uniform_real_distribution<>{ 0.01 , 0.99 };
+
+    const size_t numPoints = 1000000;
+
+    for (size_t cnt = 0; cnt < numPoints; cnt++)
+    {
+        const auto d__km = ud_d__km(mt);
+        const auto h_first = ud_h_first(mt);
+        const auto h_second = ud_h_second(mt);
+        const auto h_1__meter = std::min(h_first, h_second);
+        const auto h_2__meter = std::max(h_first, h_second);
+        const auto f__mhz = ud_f__mhz(mt);
+        const auto time_percentage = ud_time_percentage(mt);
+
+        Result res{};
+
+        auto ret = Main(d__km, h_1__meter, h_2__meter, f__mhz, time_percentage, &res);
+
+        EXPECT_EQ(std::isnan(res.A__db), false);
+    }
 }

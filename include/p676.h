@@ -1,3 +1,5 @@
+#pragma once
+
 /*=============================================================================
  |
  |       Author:  William Kozma Jr
@@ -12,7 +14,13 @@
 
 using namespace std;
 
+// Define DLLEXPORT for any platform
+#ifdef _WIN32
 #define DLLEXPORT extern "C" __declspec(dllexport)
+#else
+#define DLLEXPORT
+#endif
+
 #define MAX(x, y) (((x) > (y)) ? (x) : (y))
 #define MIN(x, y) (((x) < (y)) ? (x) : (y))
 

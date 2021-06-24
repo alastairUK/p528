@@ -8,29 +8,7 @@
  |                June 2021 : Geneva Study Group 3 Meetings
  |
  *===========================================================================*/
-
- // Define DLLEXPORT for any platform
-#ifdef _WIN32
-#define DLLEXPORT extern "C" __declspec(dllexport)
-#else
-#define DLLEXPORT
-#endif
-
-#define MAX(x, y) (((x) > (y)) ? (x) : (y))
-#define MIN(x, y) (((x) < (y)) ? (x) : (y))
-
-//
-// CONSTANTS
-///////////////////////////////////////////////
-
-#define RHO_0__M_KG                        7.5
-
-//
-// ERROR CODES
-///////////////////////////////////////////////
-
-#define ERROR_HEIGHT_TOO_SMALL              -1
-#define ERROR_HEIGHT_TOO_LARGE              -2
+#include "constants.h"
 
 //
 // FUNCTIONS

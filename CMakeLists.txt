@@ -10,6 +10,7 @@ set(CMAKE_CXX_STANDARD 11)
 include_directories(${PROJECT_SOURCE_DIR}/include)
 
 set(Headers
+    include/constants.h
     include/p528.h
     include/p676.h
     include/p835.h)

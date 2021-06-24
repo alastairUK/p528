@@ -8,24 +8,12 @@
  |                June 2021 : Geneva Study Group 3 Meetings
  |
  *===========================================================================*/
+#include "constants.h"
 
 #include <vector>
 #include <algorithm>
 
 using namespace std;
-
-// Define DLLEXPORT for any platform
-#ifdef _WIN32
-#define DLLEXPORT extern "C" __declspec(dllexport)
-#else
-#define DLLEXPORT
-#endif
-
-#define MAX(x, y) (((x) > (y)) ? (x) : (y))
-#define MIN(x, y) (((x) < (y)) ? (x) : (y))
-
-#define PI                                  3.1415926535897932384
-#define a_0__km                             6371.0
 
 // Function pointers
 using Temperature = double(*)(double);

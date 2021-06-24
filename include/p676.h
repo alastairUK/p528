@@ -13,8 +13,6 @@
 #include <vector>
 #include <algorithm>
 
-using namespace std;
-
 // Function pointers
 using Temperature = double(*)(double);
 using DryPressure = double(*)(double);
@@ -39,25 +37,25 @@ struct RayTraceConfig
 class OxygenData
 {
 public:
-    const static vector<double> f_0;
-    const static vector<double> a_1;
-    const static vector<double> a_2;
-    const static vector<double> a_3;
-    const static vector<double> a_4;
-    const static vector<double> a_5;
-    const static vector<double> a_6;
+    const static std::vector<double> f_0;
+    const static std::vector<double> a_1;
+    const static std::vector<double> a_2;
+    const static std::vector<double> a_3;
+    const static std::vector<double> a_4;
+    const static std::vector<double> a_5;
+    const static std::vector<double> a_6;
 };
 
 class WaterVapourData
 {
 public:
-    const static vector<double> f_0; 
-    const static vector<double> b_1;
-    const static vector<double> b_2;
-    const static vector<double> b_3;
-    const static vector<double> b_4;
-    const static vector<double> b_5;
-    const static vector<double> b_6;
+    const static std::vector<double> f_0; 
+    const static std::vector<double> b_1;
+    const static std::vector<double> b_2;
+    const static std::vector<double> b_3;
+    const static std::vector<double> b_4;
+    const static std::vector<double> b_5;
+    const static std::vector<double> b_6;
 };
 
 double LineShapeFactor(double f__ghz, double f_i__ghz, double delta_f__ghz, double delta);

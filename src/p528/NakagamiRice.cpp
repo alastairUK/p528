@@ -20,11 +20,11 @@
  *===========================================================================*/
 double NakagamiRice(double K, double p)
 {
-    auto lower_K = lower_bound(data::K.begin(), data::K.end(), K);
-    auto d_K = distance(data::K.begin(), lower_K);
+    auto lower_K = std::lower_bound(data::K.begin(), data::K.end(), K);
+    auto d_K = std::distance(data::K.begin(), lower_K);
 
-    auto lower_p = lower_bound(data::P.begin(), data::P.end(), p);
-    auto d_p = distance(data::P.begin(), lower_p);
+    auto lower_p = std::lower_bound(data::P.begin(), data::P.end(), p);
+    auto d_p = std::distance(data::P.begin(), lower_p);
 
     if (d_K == 0) // K <= -40
     {
@@ -33,7 +33,7 @@ double NakagamiRice(double K, double p)
         else
             return LinearInterpolation(data::P[d_p], data::NakagamiRiceCurves[0][d_p], data::P[d_p - 1], data::NakagamiRiceCurves[0][d_p - 1], p);
     }
-    else if (d_K == data::K.size()) // K > 20
+    else if (d_K == static_cast<int>(data::K.size())) // K > 20
     {
         if (d_p == 0)
             return data::NakagamiRiceCurves[d_K - 1][0];

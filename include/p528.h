@@ -13,8 +13,6 @@
 #include <vector>
 #include <algorithm>
 
-using namespace std;
-
 //
 // CLASSES
 ///////////////////////////////////////////////
@@ -22,10 +20,10 @@ using namespace std;
 class data
 {
 public:
-    const static vector<double> P;          // Percentages for interpolation and data tables
+    const static std::vector<double> P;          // Percentages for interpolation and data tables
 
-    const static vector<vector<double>> NakagamiRiceCurves;
-    const static vector<int> K;
+    const static std::vector<std::vector<double>> NakagamiRiceCurves;
+    const static std::vector<int> K;
 };
 
 //

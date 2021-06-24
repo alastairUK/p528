@@ -1,7 +1,5 @@
 #include "../../include/p676.h"
 
-#include <math.h>
-
 /*=============================================================================
  |
  |  Description:  Compute the refractive index.

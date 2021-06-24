@@ -1,7 +1,6 @@
-#include <math.h>
-#include <complex>
 #include "../../include/p528.h"
 
+#include <complex>
 /*=============================================================================
  |
  |       Author:  William Kozma Jr
